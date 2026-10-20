@@ -1,0 +1,2439 @@
+/* Page sections after the product proof: AI chat demo, how we work, public source. */
+
+/* How Incline builds — AI chat demo. */
+.flow {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: auto;
+  padding: clamp(4.5rem, 9vh, 7.5rem) var(--sp-5);
+  background: var(--color-background);
+  color: var(--color-text-primary);
+}
+
+.flow__inner {
+  width: min(100%, 74rem);
+  margin: 0 auto;
+}
+
+.flow__heading,
+.work__heading,
+.solutions__heading,
+.ops__heading {
+  max-width: 44rem;
+  margin: 0 0 var(--sp-8);
+}
+
+.flow__heading p,
+.work__heading p,
+.solutions__heading p,
+.ops__heading p {
+  margin: 0 0 var(--sp-4);
+}
+
+.flow__heading h2,
+.work__heading h2,
+.solutions__heading h2,
+.ops__heading h2 {
+  margin: 0;
+  font-size: clamp(var(--fs-7), 2.85vw, var(--fs-9));
+  letter-spacing: var(--ls-neg-2);
+  line-height: var(--lh-1-1);
+  text-wrap: balance;
+}
+
+.flow__layout {
+  display: grid;
+  align-items: center;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 30rem);
+  gap: var(--sp-9);
+}
+
+.flow__layout .flow__heading {
+  margin: 0;
+}
+
+/* Build steps: the copy is a rail that lights up with the demo's act. */
+.flow__steps {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-5);
+  max-width: 28rem;
+  margin: var(--sp-7) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.flow__step {
+  display: flex;
+  gap: var(--sp-4);
+  opacity: 0.4;
+  transition: opacity var(--tr-5);
+}
+
+.flow__step--active {
+  opacity: 1;
+}
+
+.flow__step-index {
+  padding-top: 2px;
+  color: var(--color-text-muted);
+  font-family: var(--font-mono);
+  font-size: var(--fs-2);
+  line-height: var(--lh-3);
+}
+
+.flow__step-copy {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-1);
+}
+
+.flow__step-copy strong {
+  color: var(--color-text-primary);
+  font-size: var(--fs-4);
+  font-weight: var(--fw-6);
+  line-height: var(--lh-2);
+}
+
+.flow__step-copy small {
+  color: var(--color-text-secondary);
+  font-size: var(--fs-3);
+  line-height: var(--lh-3);
+}
+
+.flow__stage {
+  min-width: 0;
+}
+
+/* Scripted Incline AI chat demo. */
+.chat-demo {
+  position: relative;
+}
+
+.chat-demo__card {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: clamp(27rem, 62vh, 33rem);
+  padding: var(--sp-5);
+  overflow: hidden;
+  border-radius: var(--br-5);
+  background: var(--glass-primary-bg);
+  box-shadow: var(--glass-primary-shadow);
+  backdrop-filter: blur(var(--blur-3));
+  -webkit-backdrop-filter: blur(var(--blur-3));
+}
+
+.chat-demo__head {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-4);
+  padding-bottom: var(--sp-3);
+  border-bottom: var(--bw-1) solid var(--color-border);
+}
+
+.chat-demo__head p {
+  margin: 0;
+  color: var(--color-text-muted);
+  font-family: var(--font-mono);
+  font-size: var(--fs-1);
+  font-weight: var(--fw-6);
+  letter-spacing: var(--ls-7);
+  text-transform: uppercase;
+}
+
+.chat-demo__head h3 {
+  margin: 2px 0 0;
+  font-size: var(--fs-5);
+  font-weight: var(--fw-7);
+  letter-spacing: var(--ls-neg-1);
+  line-height: var(--lh-2);
+}
+
+.chat-demo__status {
+  color: var(--color-text-muted);
+  font-size: var(--fs-2);
+  font-weight: var(--fw-6);
+  white-space: nowrap;
+}
+
+/* Thread: a real chat that scrolls to the newest message. */
+.chat-demo__thread {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  gap: var(--sp-3);
+  min-height: 0;
+  padding: var(--sp-4) 2px var(--sp-1);
+  overflow-y: auto;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+}
+
+.chat-demo__thread::-webkit-scrollbar {
+  display: none;
+}
+
+.chat-demo__msg {
+  max-width: 84%;
+  font-size: var(--fs-3);
+  line-height: var(--lh-3);
+}
+
+.chat-demo__msg p {
+  margin: 0;
+}
+
+.chat-demo__msg--user {
+  align-self: flex-end;
+  padding: var(--sp-3) var(--sp-4);
+  border-radius: var(--br-4);
+  border-bottom-right-radius: var(--br-1);
+  background: var(--color-surface-muted);
+  color: var(--color-text-primary);
+}
+
+.chat-demo__msg--ai {
+  align-self: flex-start;
+  color: var(--color-text-secondary);
+}
+
+.chat-demo__eyebrow {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  margin-bottom: var(--sp-1);
+  color: var(--color-text-muted);
+  font-size: var(--fs-2);
+  font-weight: var(--fw-6);
+}
+
+.chat-demo__dots {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.chat-demo__dots i {
+  width: 5px;
+  height: 5px;
+  border-radius: var(--br-7);
+  background: var(--color-text-muted);
+  animation: chatDemoBlink 1.2s ease-in-out infinite;
+}
+
+.chat-demo__dots i:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.chat-demo__dots i:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes chatDemoBlink {
+  0%,
+  60%,
+  100% {
+    opacity: 0.3;
+  }
+
+  30% {
+    opacity: 1;
+  }
+}
+
+/* Builder proposal — the structured card the AI sends back. */
+.chat-demo__proposal {
+  display: flex;
+  align-self: flex-start;
+  flex-direction: column;
+  gap: var(--sp-1);
+  width: min(100%, 26rem);
+  padding: var(--sp-4);
+  border-radius: var(--br-3);
+  background: var(--color-surface);
+}
+
+.chat-demo__proposal-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--sp-3);
+}
+
+.chat-demo__proposal-eyebrow,
+.chat-demo__proposal-meta {
+  color: var(--color-text-muted);
+  font-family: var(--font-mono);
+  font-size: var(--fs-1);
+}
+
+.chat-demo__proposal-eyebrow {
+  font-weight: var(--fw-6);
+  letter-spacing: var(--ls-6);
+  text-transform: uppercase;
+}
+
+.chat-demo__proposal-title {
+  margin: 0 0 var(--sp-1);
+  color: var(--color-text-primary);
+  font-size: var(--fs-3);
+  font-weight: var(--fw-6);
+}
+
+.chat-demo__row {
+  display: grid;
+  align-items: baseline;
+  grid-template-columns: 5.25rem minmax(0, 1fr);
+  gap: var(--sp-3);
+  padding: var(--sp-2) 0;
+}
+
+.chat-demo__row + .chat-demo__row {
+  border-top: var(--bw-1) solid var(--color-border);
+}
+
+.chat-demo__row span {
+  color: var(--color-text-muted);
+  font-family: var(--font-mono);
+  font-size: var(--fs-2);
+}
+
+.chat-demo__row strong {
+  color: var(--color-text-secondary);
+  font-size: var(--fs-2);
+  font-weight: var(--fw-5);
+}
+
+.chat-demo__action {
+  align-self: flex-start;
+  margin-top: var(--sp-2);
+  padding: var(--sp-2) var(--sp-4);
+  border: 0;
+  border-radius: var(--br-7);
+  background: var(--color-text-primary);
+  color: var(--color-background);
+  font-size: var(--fs-2);
+  font-weight: var(--fw-6);
+  line-height: var(--lh-2);
+  cursor: default;
+  transition:
+    background var(--tr-4),
+    color var(--tr-4);
+}
+
+.chat-demo__action.is-done {
+  background: var(--color-success-soft);
+  color: var(--color-success);
+}
+
+/* Composer — the cursor types here, then sends. */
+.chat-demo__composer {
+  position: relative;
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: var(--sp-3);
+  min-height: 2.875rem;
+  margin-top: var(--sp-3);
+  padding: var(--sp-2) var(--sp-2) var(--sp-2) var(--sp-4);
+  border: var(--bw-1) solid var(--color-border-strong);
+  border-radius: var(--br-7);
+  background: var(--color-surface);
+}
+
+.chat-demo__composer.is-hidden {
+  display: none;
+}
+
+.chat-demo__composer-text {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  color: var(--color-text-primary);
+  font-size: var(--fs-3);
+  line-height: var(--lh-1-4);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.chat-demo__composer-text.is-typing::after {
+  content: '';
+  display: inline-block;
+  width: 2px;
+  height: 1em;
+  margin-left: 1px;
+  vertical-align: -0.15em;
+  background: var(--color-text-primary);
+  animation: chatDemoCaret 1s steps(1) infinite;
+}
+
+@keyframes chatDemoCaret {
+  50% {
+    opacity: 0;
+  }
+}
+
+.chat-demo__composer-hint {
+  position: absolute;
+  left: var(--sp-4);
+  color: var(--color-text-muted);
+  font-size: var(--fs-3);
+  pointer-events: none;
+  transition: opacity var(--tr-3);
+}
+
+.chat-demo__send {
+  display: grid;
+  flex: 0 0 auto;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: var(--br-7);
+  background: var(--color-text-primary);
+  color: var(--color-background);
+}
+
+.chat-demo__send svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+/* Reveal: messages fade up as the demo brings them in. */
+.chat-demo__msg,
+.chat-demo__proposal {
+  opacity: 0;
+  transform: translateY(8px);
+  transition:
+    opacity var(--tr-5),
+    transform var(--tr-5);
+}
+
+.chat-demo__proposal .chat-demo__row {
+  opacity: 0;
+  transform: translateY(6px);
+  transition:
+    opacity var(--tr-4),
+    transform var(--tr-4);
+}
+
+.chat-demo__msg.is-in,
+.chat-demo__proposal.is-in,
+.chat-demo__row.is-in {
+  opacity: 1;
+  transform: none;
+}
+
+/* Soft cursor — marks every click, like someone using the product. */
+.chat-demo__cursor {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: var(--z-1);
+  width: 0;
+  height: 0;
+  opacity: 0;
+  transform: translate(-9999px, -9999px);
+  transition:
+    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity var(--tr-4);
+  pointer-events: none;
+}
+
+.chat-demo__cursor.is-visible {
+  opacity: 1;
+}
+
+.chat-demo__cursor-arrow {
+  position: absolute;
+  top: -1px;
+  left: -1px;
+  width: 16px;
+  max-width: none;
+  height: 20px;
+  fill: var(--color-text-primary);
+  stroke: var(--color-background);
+  stroke-width: 1.2;
+  stroke-linejoin: round;
+  filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.35));
+  transform-origin: 2px 2px;
+}
+
+.chat-demo__cursor.is-click .chat-demo__cursor-arrow {
+  animation: chatDemoCursorPress 0.3s ease;
+}
+
+.chat-demo__cursor-ring {
+  position: absolute;
+  top: -11px;
+  left: -11px;
+  width: 22px;
+  height: 22px;
+  border: 1.5px solid var(--color-accent);
+  border-radius: var(--br-7);
+  opacity: 0;
+}
+
+.chat-demo__cursor.is-click .chat-demo__cursor-ring {
+  animation: chatDemoClickRing 0.55s ease-out;
+}
+
+@keyframes chatDemoCursorPress {
+  40% {
+    transform: scale(0.82);
+  }
+}
+
+@keyframes chatDemoClickRing {
+  0% {
+    opacity: 0.9;
+    transform: scale(0.4);
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(1.5);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .chat-demo__cursor {
+    display: none;
+  }
+
+  .chat-demo__msg,
+  .chat-demo__proposal,
+  .chat-demo__row {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* How we work — content centered. */
+.work {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: auto;
+  padding: clamp(4.5rem, 9vh, 7.5rem) var(--sp-5);
+  background: var(--color-background);
+  color: var(--color-text-primary);
+}
+
+.work__inner {
+  width: min(100%, 74rem);
+  margin: 0 auto;
+}
+
+/* Editorial columns split by a single vertical hairline — no boxes. Each step
+   carries an accent tick and a big ghost numeral: technical, not card soup. */
+.work__grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.work__grid li {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+  padding: var(--sp-2) clamp(var(--sp-4), 2vw, var(--sp-6));
+  border-left: var(--bw-1) solid var(--color-border-strong);
+  transition: transform var(--tr-4);
+}
+
+.work__grid li:first-child {
+  padding-left: 0;
+  border-left: 0;
+}
+
+.work__index {
+  color: var(--color-text-muted);
+  font-family: var(--font-mono);
+  font-size: var(--fs-2);
+  font-weight: var(--fw-6);
+  letter-spacing: var(--ls-4);
+  line-height: var(--lh-2);
+}
+
+.work__grid h3 {
+  margin: 0;
+  font-size: var(--fs-6);
+  font-weight: var(--fw-6);
+  line-height: var(--lh-2);
+}
+
+.work__grid p {
+  margin: 0;
+  color: var(--color-text-muted);
+  font-size: var(--fs-3);
+  line-height: var(--lh-3);
+}
+
+.work__trust {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  column-gap: var(--sp-6);
+  row-gap: var(--sp-2);
+  margin: var(--sp-9) 0 0;
+}
+
+/* Guardrails read like code comments. */
+.work__trust span {
+  color: var(--color-text-muted);
+  font-family: var(--font-mono);
+  font-size: var(--fs-2);
+  line-height: var(--lh-2);
+  white-space: nowrap;
+}
+
+.work__trust span::before {
+  content: '// ';
+  opacity: var(--op-3);
+}
+
+/* Public source — content centered. */
+.source {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: auto;
+  padding: clamp(4.5rem, 9vh, 7.5rem) var(--sp-5);
+  background: var(--color-background);
+  color: var(--color-text-primary);
+}
+
+.source__inner {
+  display: grid;
+  align-items: center;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+  gap: var(--sp-8);
+  width: min(100%, 74rem);
+  margin: 0 auto;
+}
+
+.source__copy .eyebrow {
+  margin: 0 0 var(--sp-3);
+}
+
+.source__copy h2 {
+  margin: 0;
+  font-size: clamp(var(--fs-7), 2.85vw, var(--fs-9));
+  letter-spacing: var(--ls-neg-2);
+  line-height: var(--lh-1-1);
+  text-wrap: balance;
+}
+
+.source__lede {
+  max-width: 32rem;
+  margin: var(--sp-6) 0 var(--sp-5);
+  color: var(--color-text-secondary);
+  font-size: var(--fs-5);
+  line-height: var(--lh-3);
+}
+
+/* Terminal: a real terminal, always dark, traffic lights and all — the
+   Claude Code look regardless of site theme. */
+.term {
+  --term-fg: #ececf1;
+  --term-muted: #8b8b95;
+  --term-dim: #a9a9b2;
+  --term-accent: #fc4348;
+  --term-success: #00e5a0;
+  overflow: hidden;
+  border: var(--bw-1) solid rgba(255, 255, 255, 0.09);
+  border-radius: var(--br-4);
+  background: #0c0c0f;
+  box-shadow: 0 26px 70px rgba(0, 0, 0, 0.45);
+  color: var(--term-fg);
+  font-family: var(--font-mono);
+}
+
+.term__bar {
+  display: flex;
+  align-items: center;
+  margin: 0;
+  padding: var(--sp-3) var(--sp-4);
+  border-bottom: var(--bw-1) solid rgba(255, 255, 255, 0.07);
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--term-muted);
+  font-size: var(--fs-1);
+  letter-spacing: var(--ls-4);
+}
+
+.term__bar::before {
+  content: '';
+  flex: 0 0 auto;
+  width: 9px;
+  height: 9px;
+  margin-right: 2.6rem;
+  border-radius: var(--br-7);
+  background: #ff5f57;
+  box-shadow:
+    15px 0 0 #febc2e,
+    30px 0 0 #28c840;
+}
+
+.term__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+  height: 21rem;
+  padding: var(--sp-5);
+  overflow-y: auto;
+  font-family: var(--font-mono);
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+}
+
+.term__body::-webkit-scrollbar {
+  display: none;
+}
+
+/* Every line keeps its natural height — scrollable blocks would otherwise
+   flex-shrink to zero once the session fills the viewport. */
+.term__body > * {
+  flex: 0 0 auto;
+}
+
+.term__cmd {
+  margin: 0;
+  color: var(--term-fg);
+  font-size: var(--fs-3);
+  line-height: var(--lh-3);
+  overflow-wrap: anywhere;
+}
+
+.term__cmd span {
+  margin-right: var(--sp-2);
+  color: var(--term-accent);
+}
+
+.term__cmd--idle {
+  margin-top: var(--sp-2);
+}
+
+.term__out {
+  margin: 0;
+  padding-left: var(--sp-5);
+  color: var(--term-muted);
+  font-size: var(--fs-2);
+  line-height: var(--lh-3);
+  overflow-wrap: anywhere;
+}
+
+.term__ok {
+  margin: 0;
+  padding-left: var(--sp-5);
+  color: var(--term-success);
+  font-size: var(--fs-2);
+  line-height: var(--lh-3);
+}
+
+.term__ok--done {
+  margin-top: var(--sp-2);
+  font-weight: var(--fw-6);
+}
+
+/* Build-session line types: plan headers, tool calls with ⎿ results,
+   architecture blocks, and run reports — outputs over commands. */
+.term__plan-head {
+  margin: var(--sp-3) 0 0;
+  color: var(--term-fg);
+  font-size: var(--fs-2);
+  font-weight: var(--fw-6);
+  letter-spacing: var(--ls-3);
+  line-height: var(--lh-3);
+}
+
+.term__star {
+  margin-right: var(--sp-1);
+  color: var(--term-accent);
+}
+
+.term__tool {
+  margin: 0;
+  color: var(--term-dim);
+  font-size: var(--fs-2);
+  line-height: var(--lh-3);
+  overflow-wrap: anywhere;
+}
+
+.term__dot {
+  margin-right: var(--sp-1);
+  color: var(--term-success);
+}
+
+.term__tool-out {
+  margin: 0;
+  padding-left: var(--sp-4);
+  color: var(--term-muted);
+  font-size: var(--fs-2);
+  line-height: var(--lh-3);
+}
+
+.term__added {
+  color: var(--term-success);
+}
+
+.term__block,
+.term__graph {
+  margin: 0;
+  padding-left: var(--sp-5);
+  overflow-x: auto;
+  color: var(--term-dim);
+  font-size: var(--fs-2);
+  line-height: var(--lh-4);
+  white-space: pre;
+}
+
+.term__graph {
+  color: var(--term-fg);
+}
+
+.term__caret {
+  display: inline-block;
+  width: 0.55em;
+  height: 1.05em;
+  vertical-align: -0.18em;
+  background: var(--term-dim);
+  animation: termCaretBlink 1.1s steps(1) infinite;
+}
+
+@keyframes termCaretBlink {
+  50% {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .term__caret {
+    animation: none;
+  }
+}
+
+/* Public repo cards. */
+.source__repos {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+}
+
+.source__repo {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+  padding: var(--sp-5);
+  border-radius: var(--br-4);
+  background: var(--glass-secondary-bg);
+  text-decoration: none;
+  transition:
+    background var(--tr-4),
+    transform var(--tr-4);
+}
+
+.source__repo:hover {
+  background: color-mix(in srgb, var(--color-text-primary) 7%, transparent);
+  transform: translateY(-2px);
+}
+
+.source__repo-name {
+  color: var(--color-text-primary);
+  font-family: var(--font-mono);
+  font-size: var(--fs-3);
+  font-weight: var(--fw-6);
+}
+
+.source__repo p {
+  margin: 0;
+  color: var(--color-text-secondary);
+  font-size: var(--fs-3);
+  line-height: var(--lh-3);
+}
+
+.source__repo-meta {
+  color: var(--color-text-muted);
+  font-family: var(--font-mono);
+  font-size: var(--fs-1);
+}
+
+/* What we build — solutions grid. */
+.solutions,
+.ops,
+.founder {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: auto;
+  padding: clamp(4.5rem, 9vh, 7.5rem) var(--sp-5);
+  background: var(--color-background);
+  color: var(--color-text-primary);
+}
+
+.solutions__inner,
+.ops__inner,
+.founder__inner {
+  width: min(100%, 74rem);
+  margin: 0 auto;
+}
+
+/* Ops terminal section. */
+.ops__lede {
+  max-width: 30rem;
+  margin: var(--sp-6) 0 0;
+  color: var(--color-text-secondary);
+  font-size: var(--fs-5);
+  line-height: var(--lh-3);
+}
+
+.ops__terminal {
+  width: min(100%, 52rem);
+}
+
+/* Founder. */
+.founder .eyebrow {
+  margin: 0 0 var(--sp-4);
+}
+
+.founder h2 {
+  margin: 0;
+  font-size: clamp(var(--fs-7), 2.85vw, var(--fs-9));
+  letter-spacing: var(--ls-neg-2);
+  line-height: var(--lh-1-1);
+  text-wrap: balance;
+}
+
+.founder__lede {
+  max-width: 34rem;
+  margin: var(--sp-6) 0 0;
+  color: var(--color-text-secondary);
+  font-size: var(--fs-5);
+  line-height: var(--lh-3);
+}
+
+.founder__links {
+  --cluster-gap: var(--sp-3);
+  margin-top: var(--sp-7);
+}
+
+.founder__chip {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.5rem;
+  padding: 0 var(--sp-5);
+  border-radius: var(--br-7);
+  background: var(--glass-secondary-bg);
+  color: var(--color-text-secondary);
+  font-size: var(--fs-3);
+  font-weight: var(--fw-6);
+  text-decoration: none;
+  transition:
+    background var(--tr-4),
+    color var(--tr-4),
+    transform var(--tr-4);
+}
+
+.founder__chip:hover {
+  background: color-mix(in srgb, var(--color-text-primary) 8%, transparent);
+  color: var(--color-text-primary);
+  transform: translateY(-2px);
+}
+
+.founder__actions {
+  --cluster-gap: var(--sp-4);
+  margin-top: var(--sp-7);
+}
+
+/* Route pages. */
+.page-hero {
+  padding: var(--sp-9) var(--sp-5) var(--sp-7);
+  background: var(--color-background);
+  color: var(--color-text-primary);
+}
+
+.page-hero__inner,
+.page-section__inner {
+  width: min(100%, 74rem);
+  margin: 0 auto;
+}
+
+.page-hero .eyebrow {
+  margin: 0 0 var(--sp-4);
+}
+
+.page-hero h1 {
+  max-width: 44rem;
+  margin: 0;
+  font-size: clamp(var(--fs-8), 3.6vw, var(--fs-10));
+  font-weight: var(--fw-7);
+  letter-spacing: var(--ls-neg-2);
+  line-height: var(--lh-1-1);
+  text-wrap: balance;
+}
+
+.page-hero__lede {
+  max-width: 36rem;
+  margin: var(--sp-6) 0 0;
+  color: var(--color-text-secondary);
+  font-size: var(--fs-5);
+  line-height: var(--lh-3);
+}
+
+/* Route heroes share the home hero's typographic signature: a bold claim
+   answered in the serif voice. */
+.page-hero h1 em {
+  display: block;
+  color: var(--color-text-secondary);
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: var(--fw-4);
+  letter-spacing: var(--ls-neg-1);
+}
+
+/* Closing CTA band — the last full viewport of every route page. */
+.cta-band {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(6rem, 18vh, 11rem) var(--sp-5);
+  text-align: center;
+}
+
+.cta-band h2 {
+  max-width: 24ch;
+  margin: 0;
+  font-size: clamp(var(--fs-7), 3.4vw, var(--fs-9));
+  font-weight: var(--fw-7);
+  letter-spacing: var(--ls-neg-2);
+  line-height: var(--lh-1-1);
+  text-wrap: balance;
+}
+
+.cta-band h2 em {
+  display: block;
+  color: var(--color-text-secondary);
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: var(--fw-4);
+}
+
+.cta-band p {
+  max-width: 44ch;
+  margin: var(--sp-5) 0 0;
+  color: var(--color-text-secondary);
+  font-size: var(--fs-4);
+  line-height: var(--lh-3);
+}
+
+.cta-band__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-4);
+  margin-top: var(--sp-7);
+}
+
+.page-section {
+  padding: var(--sp-7) var(--sp-5) var(--sp-9);
+  background: var(--color-background);
+  color: var(--color-text-primary);
+}
+
+.page-cta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--sp-4);
+  margin-top: var(--sp-8);
+}
+
+/* Eyebrows stay in the muted grayscale of the type system. The mint accent is
+   held back for interaction only (hover states and the live demos), never as a
+   default decorative colour — the page reads monochrome first. */
+
+@media (max-width: 900px) {
+  .flow__layout {
+    grid-template-columns: 1fr;
+    gap: var(--sp-6);
+  }
+
+  .flow__stage {
+    max-width: 36rem;
+  }
+
+  .source__inner {
+    grid-template-columns: 1fr;
+    gap: var(--sp-6);
+  }
+}
+
+@media (max-width: 720px) {
+  .flow,
+  .work,
+  .source,
+  .solutions,
+  .ops,
+  .founder {
+    padding: var(--sp-8) var(--sp-4);
+  }
+
+  .founder h2 {
+    font-size: var(--fs-7);
+  }
+
+  .page-hero {
+    padding: var(--sp-8) var(--sp-4) var(--sp-6);
+  }
+
+  .page-section {
+    padding: var(--sp-6) var(--sp-4) var(--sp-8);
+  }
+
+  .flow__heading h2,
+  .work__heading h2,
+  .source__copy h2 {
+    font-size: var(--fs-7);
+  }
+
+  .chat-demo__card {
+    height: clamp(29rem, 72vh, 36rem);
+  }
+
+  .chat-demo__msg {
+    max-width: 94%;
+  }
+}
+
+@media (max-width: 640px) {
+  .work__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ==========================================================================
+   Redesign pass on the lower sections — accent, structure, proof.
+   ========================================================================== */
+
+/* Source: repo names in white mono, the way a terminal would list them. */
+.source__repo-name {
+  color: var(--color-text-primary);
+}
+
+.source__repo:hover {
+  box-shadow: inset 0 0 0 var(--bw-1)
+    color-mix(in srgb, var(--color-accent) 45%, transparent);
+}
+
+/* Founder: a code-comment manifesto line — Incline's technical voice. */
+.founder__manifesto {
+  max-width: 40rem;
+  margin: var(--sp-6) 0 0;
+  padding-left: var(--sp-4);
+  border-left: 2px solid var(--color-border-strong);
+  color: var(--color-text-secondary);
+  font-family: var(--font-mono);
+  font-size: var(--fs-3);
+  line-height: var(--lh-3);
+}
+
+.founder__manifesto span {
+  color: var(--color-text-primary);
+}
+
+/* Work columns stack cleanly: swap the vertical rule for a horizontal one. */
+@media (max-width: 900px) {
+  .work__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--sp-6) 0;
+  }
+
+  .work__grid li:nth-child(odd) {
+    padding-left: 0;
+    border-left: 0;
+  }
+}
+
+@media (max-width: 640px) {
+  .work__grid {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .work__grid li,
+  .work__grid li:nth-child(odd) {
+    padding: var(--sp-5) 0;
+    border-left: 0;
+    border-top: var(--bw-1) solid var(--color-border);
+  }
+
+  .work__grid li:first-child {
+    padding-top: 0;
+    border-top: 0;
+  }
+}
+
+/* ==========================================================================
+   Route-page layout variants. Each service/company page composes a different
+   shape from these primitives so no two route pages read the same.
+   ========================================================================== */
+
+/* A standalone eyebrow that labels an instrument below it. */
+.route-eyebrow {
+  margin: 0 0 var(--sp-5);
+}
+
+.route-eyebrow + .step-flow {
+  margin-top: 0;
+}
+
+/* Section intro used above a full-width instrument on a route page. */
+.route-lead {
+  max-width: 46rem;
+  margin: 0 0 var(--sp-2);
+}
+
+.route-lead h2 {
+  margin: 0;
+  font-size: clamp(var(--fs-7), 2.6vw, var(--fs-9));
+  font-weight: var(--fw-7);
+  letter-spacing: var(--ls-neg-2);
+  line-height: var(--lh-1-1);
+}
+
+.route-lead p {
+  margin: var(--sp-4) 0 0;
+  color: var(--color-text-secondary);
+  font-size: var(--fs-4);
+  line-height: var(--lh-3);
+}
+
+/* Spec list — labelled capability rows, editorial hairlines, no boxes. */
+.spec-list {
+  margin: var(--sp-8) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.spec-list li {
+  display: grid;
+  grid-template-columns: 3rem 1fr;
+  gap: var(--sp-2) var(--sp-6);
+  align-items: start;
+  padding: var(--sp-6) 0;
+  border-bottom: var(--bw-1) solid var(--color-border);
+}
+
+.spec-list li:last-child {
+  border-bottom: 0;
+}
+
+.spec-list__index {
+  padding-top: 0.35rem;
+  color: var(--color-text-muted);
+  font-family: var(--font-mono);
+  font-size: var(--fs-2);
+  letter-spacing: var(--ls-4);
+}
+
+.spec-list h3 {
+  margin: 0 0 var(--sp-2);
+  font-size: var(--fs-6);
+  font-weight: var(--fw-6);
+  letter-spacing: var(--ls-neg-1);
+}
+
+.spec-list h3 a {
+  color: inherit;
+  text-decoration: none;
+  transition: color var(--tr-3);
+}
+
+.spec-list h3 a:hover {
+  color: var(--color-accent);
+}
+
+.spec-list p {
+  max-width: 46rem;
+  margin: 0;
+  color: var(--color-text-secondary);
+  font-size: var(--fs-4);
+  line-height: var(--lh-3);
+}
+
+/* Step flow — a vertical, numbered pipeline with a connecting rail. */
+.step-flow {
+  max-width: 44rem;
+  margin: var(--sp-8) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.step-flow li {
+  position: relative;
+  padding: 0 0 var(--sp-7) var(--sp-8);
+  border-left: var(--bw-1) solid var(--color-border-strong);
+}
+
+.step-flow li:last-child {
+  padding-bottom: 0;
+  border-left-color: transparent;
+}
+
+.step-flow li::before {
+  content: attr(data-step);
+  position: absolute;
+  left: -0.5px;
+  top: -0.2rem;
+  display: grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  transform: translateX(-50%);
+  border: var(--bw-1) solid var(--color-border-strong);
+  border-radius: var(--br-7);
+  background: var(--color-background);
+  color: var(--color-text-muted);
+  font-family: var(--font-mono);
+  font-size: var(--fs-1);
+}
+
+.step-flow h3 {
+  margin: 0 0 var(--sp-2);
+  font-size: var(--fs-5);
+  font-weight: var(--fw-6);
+}
+
+.step-flow p {
+  max-width: 34rem;
+  margin: 0;
+  color: var(--color-text-secondary);
+  font-size: var(--fs-4);
+  line-height: var(--lh-3);
+}
+
+/* Split — a statement column beside a supporting list. */
+.split {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: var(--sp-8);
+  align-items: start;
+  margin: var(--sp-8) 0 0;
+}
+
+.split__lead h2 {
+  margin: 0;
+  font-size: clamp(var(--fs-7), 2.6vw, var(--fs-9));
+  font-weight: var(--fw-7);
+  letter-spacing: var(--ls-neg-2);
+  line-height: var(--lh-1-1);
+}
+
+.split__lead p {
+  max-width: 32rem;
+  margin: var(--sp-5) 0 0;
+  color: var(--color-text-secondary);
+  font-size: var(--fs-4);
+  line-height: var(--lh-3);
+}
+
+.split__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.split__list li {
+  padding: var(--sp-5) 0;
+  border-top: var(--bw-1) solid var(--color-border);
+}
+
+.split__list li:first-child {
+  padding-top: 0;
+  border-top: 0;
+}
+
+.split__list strong {
+  display: block;
+  margin-bottom: var(--sp-1);
+  font-size: var(--fs-4);
+  font-weight: var(--fw-6);
+}
+
+.split__list span {
+  color: var(--color-text-muted);
+  font-size: var(--fs-3);
+  line-height: var(--lh-3);
+}
+
+/* Status list — shipped products and where each one stands today, shown
+   the same way as the FAQ: two quiet columns. */
+.status-list {
+  display: grid;
+  align-items: start;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 var(--sp-9);
+  margin: var(--sp-7) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.status-list li {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--sp-3) var(--sp-4);
+  padding: var(--sp-5) 0;
+  border-bottom: var(--bw-1) solid var(--color-border);
+}
+
+@media (max-width: 820px) {
+  .status-list {
+    grid-template-columns: 1fr;
+  }
+}
+
+.status-list__name {
+  font-size: var(--fs-5);
+  font-weight: var(--fw-6);
+  letter-spacing: var(--ls-neg-1);
+}
+
+.status-list__pill {
+  padding: 0.15rem var(--sp-2);
+  border: var(--bw-1) solid var(--color-border-strong);
+  border-radius: var(--br-7);
+  color: var(--color-text-muted);
+  font-family: var(--font-mono);
+  font-size: var(--fs-0);
+  letter-spacing: var(--ls-4);
+  text-transform: uppercase;
+}
+
+.status-list__pill--live,
+.status-list__pill--done {
+  color: var(--color-success);
+  border-color: color-mix(in srgb, var(--color-success) 40%, transparent);
+}
+
+.status-list__pill--ongoing {
+  color: var(--color-secondary);
+  border-color: color-mix(in srgb, var(--color-secondary) 40%, transparent);
+}
+
+.status-list__pill--upcoming {
+  color: var(--color-upcoming);
+  border-color: color-mix(in srgb, var(--color-upcoming) 40%, transparent);
+}
+
+.status-list__desc {
+  flex: 1 1 22rem;
+  color: var(--color-text-secondary);
+  font-size: var(--fs-3);
+  line-height: var(--lh-3);
+}
+
+/* Contact panel — the one page that is a conversation, not a feature grid. */
+.contact-panel {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  gap: var(--sp-8);
+  align-items: start;
+  margin: var(--sp-8) 0 0;
+}
+
+.contact-panel__mail {
+  display: inline-block;
+  margin: 0 0 var(--sp-6);
+  color: var(--color-text-primary);
+  font-size: clamp(var(--fs-6), 2.4vw, var(--fs-8));
+  font-weight: var(--fw-7);
+  letter-spacing: var(--ls-neg-1);
+  transition: color var(--tr-4);
+}
+
+.contact-panel__mail:hover {
+  color: var(--color-accent);
+}
+
+.contact-steps {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: cstep;
+}
+
+.contact-steps li {
+  position: relative;
+  padding: 0 0 var(--sp-5) var(--sp-7);
+  color: var(--color-text-secondary);
+  font-size: var(--fs-3);
+  line-height: var(--lh-3);
+}
+
+.contact-steps li::before {
+  counter-increment: cstep;
+  content: counter(cstep);
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--color-text-muted);
+  font-family: var(--font-mono);
+  font-size: var(--fs-2);
+}
+
+.contact-panel__steps-title {
+  margin-top: var(--sp-6);
+}
+
+/* Contact form — stacked labelled fields with a leading icon cell. */
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-5);
+}
+
+.contact-form__fields {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-5);
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.contact-form__field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+}
+
+.contact-form__field > span:first-child {
+  color: var(--color-text-primary);
+  font-size: var(--fs-3);
+  font-weight: var(--fw-6);
+}
+
+.contact-form__control {
+  display: flex;
+  overflow: hidden;
+  border: var(--bw-1) solid var(--color-border-strong);
+  border-radius: var(--br-2);
+  background: var(--color-surface);
+  transition: border-color var(--tr-3);
+}
+
+.contact-form__control:focus-within {
+  border-color: var(--color-focus-ring);
+}
+
+.contact-form__icon {
+  display: grid;
+  flex: 0 0 auto;
+  place-items: center;
+  width: 3.1rem;
+  border-right: var(--bw-1) solid var(--color-border);
+  color: var(--color-accent);
+}
+
+.contact-form__control--area .contact-form__icon {
+  align-items: start;
+  padding-top: var(--sp-3);
+}
+
+.contact-form__icon svg {
+  width: 1.15rem;
+  height: 1.15rem;
+}
+
+.contact-form__control input,
+.contact-form__control textarea {
+  flex: 1;
+  min-width: 0;
+  padding: var(--sp-3) var(--sp-4);
+  border: 0;
+  background: transparent;
+  color: var(--color-text-primary);
+  font-size: var(--fs-3);
+  line-height: var(--lh-3);
+}
+
+.contact-form__control input:focus-visible,
+.contact-form__control textarea:focus-visible {
+  outline: none;
+}
+
+.contact-form__control textarea {
+  resize: vertical;
+  min-height: 9rem;
+}
+
+.contact-form__control input::placeholder,
+.contact-form__control textarea::placeholder {
+  color: var(--color-text-muted);
+}
+
+.contact-form__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--sp-4);
+  margin-top: var(--sp-1);
+}
+
+.contact-form [type="submit"]:disabled {
+  opacity: 0.65;
+  cursor: wait;
+}
+
+.contact-form__reset {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--color-text-secondary);
+  font-size: var(--fs-3);
+  font-weight: var(--fw-6);
+  cursor: pointer;
+  transition: color var(--tr-3);
+}
+
+.contact-form__reset:hover {
+  color: var(--color-accent);
+}
+
+.contact-form__status {
+  margin: 0;
+  color: var(--color-text-muted);
+  font-size: var(--fs-2);
+  line-height: var(--lh-3);
+}
+
+.contact-form__status.is-ok {
+  color: var(--color-success);
+}
+
+.contact-form__status.is-error {
+  color: var(--color-accent);
+}
+
+/* FAQ — quiet accordion under the form, two columns of three. */
+.faq {
+  display: grid;
+  align-items: start;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: var(--sp-9);
+  margin-top: var(--sp-7);
+}
+
+.faq__item {
+  border-bottom: var(--bw-1) solid var(--color-border);
+}
+
+@media (max-width: 820px) {
+  .faq {
+    grid-template-columns: 1fr;
+  }
+}
+
+.faq__item summary {
+  position: relative;
+  padding: var(--sp-5) var(--sp-8) var(--sp-5) 0;
+  color: var(--color-text-primary);
+  font-size: var(--fs-5);
+  font-weight: var(--fw-6);
+  line-height: var(--lh-2);
+  list-style: none;
+  cursor: pointer;
+  transition: color var(--tr-3);
+}
+
+.faq__item summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq__item summary::after {
+  content: '+';
+  position: absolute;
+  top: 50%;
+  right: var(--sp-2);
+  color: var(--color-text-muted);
+  font-size: var(--fs-6);
+  font-weight: var(--fw-4);
+  line-height: var(--lh-1);
+  transform: translateY(-50%);
+  transition: transform var(--tr-4);
+}
+
+.faq__item[open] summary::after {
+  transform: translateY(-50%) rotate(45deg);
+}
+
+.faq__item summary:hover {
+  color: var(--color-accent);
+}
+
+.faq__item p {
+  max-width: 52rem;
+  margin: 0;
+  padding: 0 0 var(--sp-5);
+  color: var(--color-text-secondary);
+  font-size: var(--fs-4);
+  line-height: var(--lh-3);
+}
+
+/* Collapse the two-column route layouts on narrow screens. */
+@media (max-width: 820px) {
+  .split,
+  .contact-panel {
+    grid-template-columns: 1fr;
+    gap: var(--sp-7);
+  }
+
+  .spec-list li {
+    grid-template-columns: 1fr;
+    gap: var(--sp-1);
+  }
+}
+
+/* ==========================================================================
+   Solutions cards: quiet icons, one accent, proof tags. Monochrome first —
+   the single brand accent appears only on interaction.
+   ========================================================================== */
+
+/* Ops: terminal beside the routine board — no more empty half. */
+.ops__layout {
+  display: grid;
+  align-items: center;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+  gap: var(--sp-8);
+}
+
+.ops__terminal {
+  width: 100%;
+}
+
+.ops__board {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-5);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ops__board li {
+  display: flex;
+  gap: var(--sp-4);
+  align-items: flex-start;
+}
+
+.ops__board-num {
+  flex: 0 0 auto;
+  padding-top: 0.2rem;
+  color: var(--color-text-muted);
+  font-family: var(--font-mono);
+  font-size: var(--fs-2);
+  font-weight: var(--fw-6);
+  letter-spacing: var(--ls-4);
+}
+
+.ops__board strong {
+  display: block;
+  margin-bottom: var(--sp-1);
+  font-size: var(--fs-4);
+  font-weight: var(--fw-6);
+}
+
+.ops__board div span {
+  color: var(--color-text-muted);
+  font-size: var(--fs-3);
+  line-height: var(--lh-3);
+}
+
+/* Founder + public source proof: one full-width section, two columns. */
+.founder__layout {
+  display: grid;
+  align-items: start;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  gap: var(--sp-9);
+}
+
+.founder__proof {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+}
+
+.founder__proof-title {
+  margin: 0;
+}
+
+.founder__proof-lede {
+  max-width: 30rem;
+  margin: 0 0 var(--sp-2);
+  color: var(--color-text-secondary);
+  font-size: var(--fs-3);
+  line-height: var(--lh-3);
+}
+
+.founder__proof .text-link {
+  align-self: flex-start;
+}
+
+@media (max-width: 980px) {
+  .ops__layout,
+  .founder__layout {
+    grid-template-columns: 1fr;
+    gap: var(--sp-7);
+  }
+
+  .ops__board {
+    max-width: 36rem;
+  }
+}
+
+/* ==========================================================================
+   Route case studies. Each solution page opens with its product's accent,
+   shows the real product in a device frame, and pairs capability copy with
+   the running proof.
+   ========================================================================== */
+
+.page-hero {
+  position: relative;
+  overflow: hidden;
+}
+
+.page-hero__inner {
+  position: relative;
+}
+
+/* True-stack chips: the technologies actually running the product. */
+.page-hero__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--sp-2);
+  margin: var(--sp-6) 0 0;
+}
+
+.page-hero__meta-label {
+  margin-right: var(--sp-2);
+  color: var(--color-text-muted);
+  font-size: var(--fs-1);
+  font-weight: var(--fw-7);
+  letter-spacing: var(--ls-7);
+  text-transform: uppercase;
+}
+
+.page-hero__meta span:not(.page-hero__meta-label) {
+  padding: 0.15rem var(--sp-3);
+  border: var(--bw-1) solid var(--color-border);
+  border-radius: var(--br-7);
+  color: var(--color-text-secondary);
+  font-family: var(--font-mono);
+  font-size: var(--fs-1);
+}
+
+/* Case layout: standalone device frame beside the capability copy. */
+.case {
+  display: grid;
+  align-items: center;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: var(--sp-9);
+  margin: var(--sp-8) 0 0;
+}
+
+.case--reverse {
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+}
+
+.case__copy .spec-list,
+.case__copy .step-flow,
+.case__copy .split__list {
+  margin-top: var(--sp-6);
+}
+
+.case__device {
+  min-width: 0;
+}
+
+/* Device frames run standalone here — undo the wall's absolute layout. */
+.case__device .tp__iphone {
+  position: static;
+  width: min(15.5rem, 82%);
+  margin-inline: auto;
+}
+
+.case__device .tp__macbook {
+  position: static;
+  width: min(36rem, 100%);
+  margin-inline: auto;
+}
+
+.case__device .tp__ipad {
+  position: static;
+  width: min(21rem, 88%);
+  margin-inline: auto;
+}
+
+.case__device .tp__imac {
+  position: static;
+  max-width: min(38rem, 100%);
+  margin-inline: auto;
+}
+
+/* Standalone screens re-tune the wall's viewport-relative type scale to the
+   fixed frame widths used here, so interiors stay crisp and in proportion.
+   Tradign's inline screens (no data-product) keep the wall's own scale where
+   they can; registry screens (pridie / accept-user) are pure em layouts and
+   get per-product clamps. */
+
+/* Tradign phone pulse — wall proportions at the bigger standalone width. */
+.case__device .tp__screen--phone {
+  font-size: calc(clamp(0.6rem, 1.02vw, 0.92rem) * var(--screen-zoom, 1));
+}
+
+.case__device .tp__screen--phone[data-product='accept-user'] {
+  font-size: calc(clamp(0.48rem, 0.68vw, 0.6rem) * var(--screen-zoom, 1));
+}
+
+.case__device .tp__screen--phone[data-product='pridie'] {
+  font-size: calc(clamp(0.56rem, 0.78vw, 0.7rem) * var(--screen-zoom, 1));
+}
+
+/* Laptop: match the wall's content-to-frame ratio (fixes the composer
+   drifting over the conversation). */
+.case__device .tp__screen--laptop {
+  font-size: calc(clamp(0.3rem, 0.46vw, 0.5rem) * var(--screen-zoom, 1));
+}
+
+.case__device .tp__screen--laptop[data-product] {
+  font-size: calc(clamp(0.36rem, 0.52vw, 0.52rem) * var(--screen-zoom, 1));
+}
+
+.case__device .tp__screen--tablet {
+  font-size: calc(clamp(0.4rem, 0.55vw, 0.55rem) * var(--screen-zoom, 1));
+}
+
+/* Pridie's calendar surfaces are airier than the Telegram chat — scale them
+   up so the taller standalone frames read full, not half empty. */
+.case__device .tp__screen--tablet[data-product='pridie'] {
+  font-size: calc(clamp(0.5rem, 0.7vw, 0.7rem) * var(--screen-zoom, 1));
+}
+
+/* Registry desktops (admin panel / workspace) are em layouts. */
+.case__device .tp__screen--desktop[data-product] {
+  font-size: calc(clamp(0.3rem, 0.38vw, 0.42rem) * var(--screen-zoom, 1));
+}
+
+/* The Tradign dashboard mixes rem-sized pills with em text, so it is scaled
+   as one unit: content lays out at the wall's 50rem width, then the wrapper
+   scales it to the standalone frame. Everything shrinks together. */
+.case__device .tp__zoom {
+  --z: 0.76;
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  width: calc(100% / var(--z));
+  height: calc(100% / var(--z));
+  transform: scale(var(--z));
+  transform-origin: top left;
+}
+
+/* Registry screens fill the taller standalone frames instead of floating in
+   the top third. Route pages do not load product-switcher.css, so the panel
+   gets its flex shell here; the interiors are flex layouts, so stretching
+   pins composers to the bottom and grows the conversation area. */
+/* Desktop and laptop screens are block in the wall; the standalone frames
+   need them as flex columns so the mounted panel can stretch. */
+.case__device .tp__screen {
+  display: flex;
+  flex-direction: column;
+}
+
+.case__device .product-preview-panel {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  width: 100%;
+  min-height: 0;
+}
+
+.case__device .product-preview-panel > .product-screen {
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
+/* The wall's tiny phone hides the stats and news cards; the standalone
+   phone has room for the full pulse stack. */
+.case__device .tp__screen--phone .pulse__card--stats,
+.case__device .tp__screen--phone .pulse__card--news {
+  display: flex;
+}
+
+/* A little life inside the standalone screens: the live dot breathes and
+   the pulse dot blinks, so the previews read as running software. */
+.case__device .main-overview__sync-dot,
+.case__device .pulse__dot {
+  animation: caseLiveDot 2.2s ease-in-out infinite;
+}
+
+@keyframes caseLiveDot {
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.35;
+  }
+}
+
+/* Hover-synced previews: capability rows drive which device panel shows. */
+.case__device [data-screen-panel][hidden] {
+  display: none;
+}
+
+.case__device [data-screen-panel] {
+  animation: casePanelIn 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes casePanelIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+[data-case-sync] [data-screen] {
+  cursor: pointer;
+  transition: opacity var(--tr-4);
+}
+
+[data-case-sync] [data-screen]:not(.is-active) {
+  opacity: 0.55;
+}
+
+[data-case-sync] [data-screen].is-active .spec-list__index,
+[data-case-sync] [data-screen].is-active::before {
+  color: var(--color-accent);
+  border-color: color-mix(in srgb, var(--color-accent) 55%, transparent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .case__device [data-screen-panel] {
+    animation: none;
+  }
+}
+
+@media (max-width: 900px) {
+  .case,
+  .case--reverse {
+    grid-template-columns: 1fr;
+    gap: var(--sp-7);
+  }
+
+  .case__device {
+    order: -1;
+  }
+}
+
+/* ==========================================================================
+   Service index — the studio's disciplines in display type. No cards:
+   four huge lines that light up and point at their pages.
+   ========================================================================== */
+
+.services {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(4.5rem, 9vh, 7.5rem) var(--sp-5);
+  background: var(--color-background);
+  color: var(--color-text-primary);
+}
+
+.services__inner {
+  width: min(100%, 74rem);
+  margin: 0 auto;
+}
+
+/* ==========================================================================
+   Timeline (about) — the road so far, one rail, story order.
+   ========================================================================== */
+
+.timeline {
+  max-width: 46rem;
+  margin: var(--sp-8) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.timeline li {
+  position: relative;
+  padding: 0 0 var(--sp-7) var(--sp-8);
+  border-left: var(--bw-1) solid var(--color-border-strong);
+}
+
+.timeline li:last-child {
+  padding-bottom: 0;
+  border-left-color: transparent;
+}
+
+.timeline li::before {
+  content: '';
+  position: absolute;
+  top: 0.25rem;
+  left: -0.5px;
+  width: 0.8rem;
+  height: 0.8rem;
+  transform: translateX(-50%);
+  border: var(--bw-3) solid var(--color-border-strong);
+  border-radius: var(--br-7);
+  background: var(--color-background);
+}
+
+.timeline li[data-state='done']::before {
+  border-color: var(--color-success);
+  box-shadow: 0 0 10px color-mix(in srgb, var(--color-success) 45%, transparent);
+}
+
+.timeline li[data-state='ongoing']::before {
+  border-color: var(--color-secondary);
+  box-shadow: 0 0 10px color-mix(in srgb, var(--color-secondary) 45%, transparent);
+}
+
+.timeline li[data-state='upcoming']::before {
+  border-color: var(--color-upcoming);
+  box-shadow: 0 0 10px color-mix(in srgb, var(--color-upcoming) 45%, transparent);
+}
+
+.timeline__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--sp-3);
+}
+
+.timeline h3 {
+  margin: 0;
+  font-size: var(--fs-6);
+  font-weight: var(--fw-6);
+  letter-spacing: var(--ls-neg-1);
+  line-height: var(--lh-2);
+}
+
+.timeline p {
+  max-width: 38rem;
+  margin: var(--sp-2) 0 0;
+  color: var(--color-text-secondary);
+  font-size: var(--fs-4);
+  line-height: var(--lh-3);
+}
+
+/* ==========================================================================
+   Agent carousel (ai-automation) — one rounded panel, title on the left,
+   sliding workflows on the right with a counter and prev/next arrows.
+   Mirrors the tradign.com trust carousel; auto-advances gently until the
+   reader takes over.
+   ========================================================================== */
+
+.acar {
+  margin: var(--sp-8) 0 0;
+}
+
+.acar__slides {
+  position: relative;
+  min-height: 15rem;
+}
+
+/* Each workflow is its own card: live icon left, copy right. */
+.acar__slide {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  align-items: center;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: clamp(var(--sp-5), 4vw, var(--sp-8));
+  padding: clamp(2rem, 4vw, 3rem);
+  border: var(--bw-1) solid var(--color-border);
+  border-radius: var(--br-5);
+  background: var(--color-surface);
+  opacity: 0;
+  transform: translateX(24px);
+  visibility: hidden;
+  transition:
+    opacity 0.4s ease,
+    transform 0.4s ease,
+    visibility 0s linear 0.4s;
+}
+
+.acar__slide--left {
+  transform: translateX(-24px);
+}
+
+.acar__slide--active {
+  position: relative;
+  opacity: 1;
+  transform: none;
+  visibility: visible;
+  transition-delay: 0s;
+}
+
+/* Live icons: quiet boxes whose glyphs keep working. */
+.acar__icon {
+  display: grid;
+  place-items: center;
+  width: 5.5rem;
+  height: 5.5rem;
+  border-radius: var(--br-4);
+  background: color-mix(in srgb, var(--color-text-primary) 5%, transparent);
+  color: var(--color-text-secondary);
+}
+
+.acar__icon svg {
+  width: 2.6rem;
+  height: 2.6rem;
+}
+
+.acar__copy {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+  min-width: 0;
+}
+
+/* Each workflow opens with its pipeline in mono — the agent's route. */
+.acar__flow {
+  margin: 0;
+  color: var(--color-text-muted);
+  font-family: var(--font-mono);
+  font-size: var(--fs-2);
+  letter-spacing: var(--ls-2);
+}
+
+.acar__slide h3 {
+  margin: 0;
+  font-size: var(--fs-6);
+  font-weight: var(--fw-6);
+  letter-spacing: var(--ls-neg-1);
+  line-height: var(--lh-2);
+}
+
+.acar__copy > p:last-child {
+  max-width: 38rem;
+  margin: 0;
+  color: var(--color-text-secondary);
+  font-size: var(--fs-4);
+  line-height: var(--lh-3);
+}
+
+/* Icon life: a letter drops into the tray… */
+.ic-triage__mail {
+  animation: icTriageDrop 3s ease-in-out infinite;
+}
+
+@keyframes icTriageDrop {
+  0%,
+  15% {
+    opacity: 0;
+    transform: translateY(-7px);
+  }
+
+  35%,
+  70% {
+    opacity: 1;
+    transform: none;
+  }
+
+  90%,
+  100% {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+}
+
+/* …the anomaly dot pulses on the chart… */
+.ic-anom__line {
+  stroke-dasharray: 64;
+  animation: icAnomDraw 4s ease-in-out infinite;
+}
+
+@keyframes icAnomDraw {
+  0% {
+    stroke-dashoffset: 64;
+  }
+
+  45%,
+  80% {
+    stroke-dashoffset: 0;
+  }
+
+  100% {
+    stroke-dashoffset: -64;
+  }
+}
+
+.ic-anom__dot {
+  fill: var(--color-accent);
+  animation: icAnomPulse 2s ease-in-out infinite;
+  transform-origin: 27px 14px;
+}
+
+@keyframes icAnomPulse {
+  0%,
+  100% {
+    opacity: 0.5;
+    transform: scale(0.8);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.15);
+  }
+}
+
+/* …the call waveform keeps talking… */
+.acar__icon .ic-wave {
+  animation: icWave 1.4s ease-in-out infinite;
+  transform-origin: center;
+}
+
+.acar__icon .ic-wave:nth-of-type(2) {
+  animation-delay: 0.15s;
+}
+
+.acar__icon .ic-wave:nth-of-type(3) {
+  animation-delay: 0.3s;
+}
+
+.acar__icon .ic-wave:nth-of-type(4) {
+  animation-delay: 0.45s;
+}
+
+.acar__icon .ic-wave:nth-of-type(5) {
+  animation-delay: 0.6s;
+}
+
+@keyframes icWave {
+  0%,
+  100% {
+    transform: scaleY(0.55);
+  }
+
+  50% {
+    transform: scaleY(1);
+  }
+}
+
+/* …and the digest writes itself, line by line. */
+.ic-digest__line {
+  animation: icDigestLine 3.6s ease-in-out infinite;
+}
+
+.ic-digest__line:nth-of-type(2) {
+  animation-delay: 0.4s;
+}
+
+.ic-digest__line:nth-of-type(3) {
+  animation-delay: 0.8s;
+}
+
+@keyframes icDigestLine {
+  0%,
+  10% {
+    opacity: 0;
+  }
+
+  25%,
+  75% {
+    opacity: 1;
+  }
+
+  90%,
+  100% {
+    opacity: 0;
+  }
+}
+
+/* Counter + arrows below the cards — no extra hairline. */
+.acar__nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: var(--sp-5);
+}
+
+.acar__count {
+  color: var(--color-text-muted);
+  font-family: var(--font-mono);
+  font-size: var(--fs-2);
+  font-variant-numeric: tabular-nums;
+}
+
+.acar__count strong {
+  color: var(--color-text-primary);
+  font-weight: var(--fw-6);
+}
+
+.acar__arrows {
+  display: flex;
+  gap: var(--sp-2);
+}
+
+.acar__arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.6rem;
+  height: 2.6rem;
+  border: 0;
+  border-radius: var(--br-7);
+  background: color-mix(in srgb, var(--color-text-primary) 6%, transparent);
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  transition:
+    background var(--tr-2),
+    color var(--tr-2);
+}
+
+.acar__arrow:hover {
+  background: color-mix(in srgb, var(--color-text-primary) 12%, transparent);
+  color: var(--color-text-primary);
+}
+
+.acar__arrow svg {
+  width: 1rem;
+  height: 1rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+@media (max-width: 720px) {
+  .acar__slides {
+    min-height: 22rem;
+  }
+
+  .acar__slide {
+    grid-template-columns: 1fr;
+    align-content: start;
+    gap: var(--sp-5);
+  }
+}
